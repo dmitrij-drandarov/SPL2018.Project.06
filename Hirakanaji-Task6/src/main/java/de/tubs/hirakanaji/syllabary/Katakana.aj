@@ -16,25 +16,25 @@ public aspect Katakana {
     public static final String[][] katakanaChars = new String[0][0];
 
     before(): execution(String de.tubs.hirakanaji.gamemode.Scrambler.startScrambler()) {
-        syllabaries += " " + getClass().getName();
+        syllabaries += " " + getClass().getSimpleName();
     }
 
     after(): call(String de.tubs.hirakanaji.gamemode.LearnVocabulary.getUserInput()) {
-        if (getClass().getName().equalsIgnoreCase(Scrambler.inputSyllabary)) {
+        if (getClass().getSimpleName().equalsIgnoreCase(Scrambler.inputSyllabary)) {
             Scrambler.dataSet = Scrambler.getDataSet(katakanaChars, katakanaGojuuon, katakanaGojuuonDakuten,
                     katakanaYouon, katakanaYouonDakuten);
         }
     }
 
     after(): call(String de.tubs.hirakanaji.gamemode.ShowSyllables.getUserInput()) {
-        if (getClass().getName().equalsIgnoreCase(ShowSyllables.inputSyllabary)) {
+        if (getClass().getSimpleName().equalsIgnoreCase(ShowSyllables.inputSyllabary)) {
             ShowSyllables.dataSet = ShowSyllables.getDataSet(katakanaChars, katakanaGojuuon, katakanaGojuuonDakuten,
                     katakanaYouon, katakanaYouonDakuten);
         }
     }
 
     after(): call(String de.tubs.hirakanaji.gamemode.SyllableTrainer.getUserInput()) {
-        if (getClass().getName().equalsIgnoreCase(SyllableTrainer.inputSyllabary)) {
+        if (getClass().getSimpleName().equalsIgnoreCase(SyllableTrainer.inputSyllabary)) {
             SyllableTrainer.dataSet = SyllableTrainer.getDataSet(katakanaChars, katakanaGojuuon, katakanaGojuuonDakuten,
                     katakanaYouon, katakanaYouonDakuten);
         }

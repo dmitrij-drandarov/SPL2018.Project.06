@@ -15,19 +15,19 @@ public aspect Romaji {
 
     public static final String[][] romajiChars = new String[0][0];
 
-    before(): execution(void de.tubs.hirakanaji.gamemode.Scrambler.startScrambler()) {
-        syllabaries += " " + getClass().getName();
+    before(): execution(String de.tubs.hirakanaji.gamemode.Scrambler.startScrambler()) {
+        syllabaries += " " + getClass().getSimpleName();
     }
 
     after(): call(String de.tubs.hirakanaji.gamemode.LearnVocabulary.getUserInput()) {
-        if (getClass().getName().equalsIgnoreCase(Scrambler.inputSyllabary)) {
+        if (getClass().getSimpleName().equalsIgnoreCase(Scrambler.inputSyllabary)) {
             Scrambler.dataSet = Scrambler.getDataSet(romajiChars, romajiGojuuon, romajiGojuuonDakuten,
                     romajiYouon, romajiYouonDakuten);
         }
     }
 
     after(): call(String de.tubs.hirakanaji.gamemode.ShowSyllables.getUserInput()) {
-        if (getClass().getName().equalsIgnoreCase(ShowSyllables.inputSyllabary)) {
+        if (getClass().getSimpleName().equalsIgnoreCase(ShowSyllables.inputSyllabary)) {
             ShowSyllables.dataSet = ShowSyllables.getDataSet(romajiChars, romajiGojuuon, romajiGojuuonDakuten,
                     romajiYouon, romajiYouonDakuten);
         }

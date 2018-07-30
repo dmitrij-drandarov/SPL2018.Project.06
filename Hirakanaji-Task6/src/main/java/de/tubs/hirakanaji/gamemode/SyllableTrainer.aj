@@ -17,12 +17,13 @@ public aspect SyllableTrainer {
     public static String syllabaries;
     public static String inputSyllabary;
 
-    before(): call(void de.tubs.hirakanaji.HirakanajiApplication.main()) {
-        gameModes += " " + getClass().getName();
+    before(): execution(void de.tubs.hirakanaji.HirakanajiApplication.main(String[])) {
+        gameModes += " " + getClass().getSimpleName();
+        System.out.println("INCLUDING SYLLABLE TRAINER12");
     }
 
     after(): call(String de.tubs.hirakanaji.HirakanajiApplication.getUserInput()) {
-        if (getClass().getName().equalsIgnoreCase(userInput)) {
+        if (getClass().getSimpleName().equalsIgnoreCase(userInput)) {
             exportText = startSyllableTrainer();
         }
     }

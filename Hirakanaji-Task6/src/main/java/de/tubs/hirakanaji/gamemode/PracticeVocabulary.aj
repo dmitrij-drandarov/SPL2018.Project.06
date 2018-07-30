@@ -17,12 +17,13 @@ public aspect PracticeVocabulary {
     public static String inputUnit;
     public static String[][] dataSet;
 
-    before(): call(void de.tubs.hirakanaji.HirakanajiApplication.main()) {
-        gameModes += " " + getClass().getName();
+    before(): execution(void de.tubs.hirakanaji.HirakanajiApplication.main(String[])) {
+        gameModes += " " + getClass().getSimpleName();
+        System.out.println("INCLUDING PRACTICE VOCABULARY");
     }
 
     after(): call(String de.tubs.hirakanaji.HirakanajiApplication.getUserInput()) {
-        if (getClass().getName().equalsIgnoreCase(userInput)) {
+        if (getClass().getSimpleName().equalsIgnoreCase(userInput)) {
             exportText = startPracticeVocabulary();
         }
     }

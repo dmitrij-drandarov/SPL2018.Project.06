@@ -8,21 +8,21 @@ import static de.tubs.hirakanaji.gamemode.LearnVocabulary.inputUnit;
 public aspect Unit1 {
 
     before(): execution(String de.tubs.hirakanaji.gamemode.LearnVocabulary.startLearnVocabulary()) {
-        LearnVocabulary.units += " " + getClass().getName();
+        LearnVocabulary.units += " " + getClass().getSimpleName();
     }
 
     before(): execution(String de.tubs.hirakanaji.gamemode.PracticeVocabulary.startPracticeVocabulary()) {
-        PracticeVocabulary.units += " " + getClass().getName();
+        PracticeVocabulary.units += " " + getClass().getSimpleName();
     }
 
     after(): call(String de.tubs.hirakanaji.gamemode.LearnVocabulary.getUserInput()) {
-        if (getClass().getName().equalsIgnoreCase(inputUnit)) {
+        if (getClass().getSimpleName().equalsIgnoreCase(inputUnit)) {
             LearnVocabulary.dataSet = LearnVocabulary.getDataSet(unit1Vocabulary);
         }
     }
 
     after(): call(String de.tubs.hirakanaji.gamemode.PracticeVocabulary.getUserInput()) {
-        if (getClass().getName().equalsIgnoreCase(inputUnit)) {
+        if (getClass().getSimpleName().equalsIgnoreCase(inputUnit)) {
             PracticeVocabulary.dataSet = PracticeVocabulary.getDataSet(unit1Vocabulary);
         }
     }

@@ -12,7 +12,7 @@ public class HirakanajiApplication {
 
     private static List<String> properties;
 
-    public static String gameModes;
+    public static String gameModes = "";
     public static String exportText;
     public static String userInput;
 
@@ -27,7 +27,7 @@ public class HirakanajiApplication {
         userInput = getUserInput();
     }
 
-    private static String getUserInput() {
+    public static String getUserInput() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
